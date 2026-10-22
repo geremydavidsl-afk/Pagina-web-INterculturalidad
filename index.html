@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Proyecto de Interculturalidad y Reencuentros Familiares - Universidad Nacional de Ingeniería (UNI) Grupo 2M5-SIS-S. Análisis genealógico, migratorio y cultural.">
+    <title>Proyecto de Interculturalidad y Reencuentros Familiares | UNI 2M5-SIS-S</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+       VARIABLES Y SISTEMA DE DISEÑO
+       ========================================================================== */
+        :root {
+            --bg-primary: #070a10;
+            --bg-secondary: #0d121c;
+            --bg-card: rgba(18, 25, 38, 0.75);
+            --bg-card-hover: rgba(28, 38, 58, 0.85);
+            --bg-glass: rgba(14, 21, 33, 0.65);
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(56, 189, 248, 0.3);
+            --border-gold: rgba(245, 158, 11, 0.35);
+
+            --color-primary: #0ea5e9;
+            /* Azul Nicaragua vibrante */
+            --color-primary-light: #38bdf8;
+            --color-primary-glow: rgba(14, 165, 233, 0.35);
+            --color-gold: #f59e0b;
+            /* Oro ancestral */
+            --color-gold-glow: rgba(245, 158, 11, 0.3);
+            --color-terracotta: #f97316;
+            /* Cerámica de Carazo y Boaco */
+            --color-emerald: #10b981;
+            /* Selva de Matagalpa */
+            --color-purple: #8b5cf6;
+
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+
+            --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-heritage: 'Cinzel', serif;
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 9999px;
+
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 30px rgba(14, 165, 233, 0.25);
+
+            --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.65;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(245, 158, 11, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: var(--font-title);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(14, 165, 233, 0.12);
+            color: var(--color-primary-light);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        .badge-gold {
+            background: rgba(245, 158, 11, 0.12);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+            background: linear-gradient(135deg, #0369a1, #0284c7);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+            margin: 0 auto;
+            max-width: 1140px;
+            padding: 0 16px;
+        }
+
+        .nav-inner {
+            background: rgba(13, 18, 28, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .uni-emblem {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: white;
+            letter-spacing: 0.05em;
+            box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
+        }
+
+        .nav-brand-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .nav-brand-sub {
+            font-size: 0.7rem;
+            color: var(--color-primary-light);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: var(--radius-full);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* HERO */
+        .hero-section {
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .hero-badge-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 70%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #38bdf8, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+            color: var(--color-primary-light);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero-subtitle .uni-tag {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: #fcd34d;
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+        }
+
+        /* Integrantes */
+        .integrantes-wrapper {
+            margin-top: 48px;
+        }
+
+        .integrantes-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .integrantes-header::before,
+        .integrantes-header::after {
+            content: "";
+            height: 1px;
+            width: 60px;
+            background: var(--border-subtle);
+        }
+
+        .integrantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .integrante-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .integrante-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--color-primary), var(--color-gold));
+            opacity: 0.7;
+        }
+
+        .integrante-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.2);
+        }
+
+        .integrante-order {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-gold);
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        .integrante-nombre {
+            font-family: var(--font-title);
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            line-height: 1.35;
+        }
+
+        .integrante-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+        }
+
+        .stat-num {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #38bdf8, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .section-block {
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 56px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3.5vw, 2.7rem);
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+       SECCIÓN 2: MEMORIA - GENOGRAMAS FAMILIARES Y CAPTURAS
+       ========================================================================== */
+        .genogram-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .family-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(12px);
+        }
+
+        .family-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), var(--shadow-glow);
+        }
+
+        .family-card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-primary-light);
+            margin-bottom: 8px;
+        }
+
+        .family-card-title {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        /* Vista previa del gráfico en la tarjeta */
+        .card-graph-preview {
+            position: relative;
+            width: 100%;
+            height: 145px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #080c14;
+            cursor: pointer;
+        }
+
+        .card-graph-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.4s ease, filter 0.3s ease;
+            filter: brightness(0.85);
+        }
+
+        .card-graph-preview:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+
+        .card-graph-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(7, 10, 16, 0.88) 0%, rgba(7, 10, 16, 0.2) 65%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 10px 14px;
+        }
+
+        .card-graph-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(14, 165, 233, 0.6);
+            backdrop-filter: blur(6px);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-graph-count {
+            font-size: 0.72rem;
+            color: #fbbf24;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .ego-action-btn {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border: 1.5px solid rgba(245, 158, 11, 0.45);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fef3c7;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ego-action-btn:hover {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.12));
+            border-color: #f59e0b;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+        }
+
+        .ego-btn-info {
+            text-align: left;
+        }
+
+        .ego-badge-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--color-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ego-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--color-gold);
+            box-shadow: 0 0 8px var(--color-gold);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
+        }
+
+        .ego-btn-name {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        .ego-click-hint {
+            font-size: 0.75rem;
+            background: rgba(245, 158, 11, 0.2);
+            padding: 6px 10px;
+            border-radius: var(--radius-full);
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .parents-preview {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.82rem;
+        }
+
+        .parents-preview strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-primary-light);
+        }
+
+        /* ==========================================================================
+       MODAL DE GENOGRAMA DETALLADO
+       ========================================================================== */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 12, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-window {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: var(--radius-xl);
+            max-width: 920px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(14, 165, 233, 0.2);
+            transform: scale(0.92) translateY(20px);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .modal-backdrop.open .modal-window {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: rgba(13, 18, 28, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .modal-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        /* Pestañas del Modal */
+        .modal-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 12px;
+        }
+
+        .modal-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 9px 18px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .modal-tab-btn.active {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #fff;
+            border-color: #38bdf8;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Visor de Capturas en Modal */
+        .graph-viewer-container {
+            background: #080c14;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .graph-selector-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .graph-selector-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .graph-selector-btn.active {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        .graph-img-frame {
+            position: relative;
+            max-height: 480px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in;
+        }
+
+        .graph-img-frame img {
+            max-width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .graph-img-frame:hover img {
+            transform: scale(1.02);
+        }
+
+        .graph-caption-bar {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Bloque EGO en Modal */
+        .ego-spotlight-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(14, 165, 233, 0.08));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .ego-spotlight-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 6px;
+        }
+
+        .ego-spotlight-name {
+            font-family: var(--font-title);
+            font-size: 1.45rem;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .parents-highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .parent-card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+        }
+
+        .parent-relation {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-primary-light);
+            margin-bottom: 4px;
+        }
+
+        .parent-name {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .genealogy-tree-visual {
+            background: rgba(7, 10, 16, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .tree-tier {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .tree-tier:last-child {
+            margin-bottom: 0;
+        }
+
+        .tier-header {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tier-nodes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .gen-node {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gen-node.ego-node {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fef3c7;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+        }
+
+        .symbol-circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid #ec4899;
+            display: inline-block;
+        }
+
+        .symbol-triangle {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 11px solid #38bdf8;
+            display: inline-block;
+        }
+
+        /* ==========================================================================
+       LIGHTBOX / PANTALLA COMPLETA PARA GRÁFICOS
+       ========================================================================== */
+        .lightbox-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 5, 10, 0.96);
+            backdrop-filter: blur(16px);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-toolbar {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(18, 25, 38, 0.85);
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border-subtle);
+            z-index: 10;
+        }
+
+        .lightbox-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .lightbox-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-img-wrapper {
+            max-width: 95vw;
+            max-height: 85vh;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .lightbox-img-wrapper img {
+            max-width: 100%;
+            max-height: 82vh;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transition: transform 0.25s ease;
+        }
+
+        /* 3. MIGRACION */
+        .migration-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .map-canvas-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .map-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 440px;
+            position: relative;
+            border-radius: var(--radius-lg);
+            background: #090e17;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .map-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .route-path {
+            stroke-dasharray: 6, 6;
+            animation: dashMove 2.5s linear infinite;
+            stroke-linecap: round;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes dashMove {
+            to {
+                stroke-dashoffset: -24;
+            }
+        }
+
+        .city-marker {
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .city-marker:hover {
+            transform: scale(1.3);
+        }
+
+        .migration-routes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .route-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .route-card:hover,
+        .route-card.active {
+            background: var(--bg-card-hover);
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateX(6px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .route-card.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            border-radius: 4px 0 0 4px;
+            background: var(--color-primary);
+        }
+
+        .route-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .route-student {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .route-badge {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            background: rgba(14, 165, 233, 0.15);
+            color: var(--color-primary-light);
+            font-weight: 600;
+        }
+
+        .route-path-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin-top: 4px;
+        }
+
+        .route-arrow {
+            color: var(--color-gold);
+            font-weight: 800;
+        }
+
+        .route-destination {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .route-cultural-detail {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.45;
+        }
+
+        /* 4. DIVERSIDAD */
+        .patterns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .pattern-column {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            backdrop-filter: blur(12px);
+        }
+
+        .pattern-col-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .pattern-col-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .pattern-col-icon.common {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        .pattern-col-icon.different {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+
+        .pattern-col-title {
+            font-size: 1.35rem;
+            color: #fff;
+        }
+
+        .pattern-col-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .pattern-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .pattern-card-item {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .pattern-card-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .pattern-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .pattern-item-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pattern-item-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .pattern-item-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .genealogy-highlight-tag {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            color: #c4b5fd;
+        }
+
+        /* 5. REFLEXION */
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .reflection-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+        }
+
+        .reflection-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .reflection-card.featured {
+            background: linear-gradient(145deg, rgba(18, 25, 38, 0.85), rgba(30, 27, 45, 0.85));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+
+        .reflection-num {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--color-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .reflection-question {
+            font-family: var(--font-title);
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .reflection-answer {
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+        }
+
+        .reflection-answer.literal-quote {
+            font-style: italic;
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 3px solid var(--color-gold);
+            padding: 14px 18px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            color: #fef3c7;
+            margin-top: 8px;
+        }
+
+        /* 6. FOOTER */
+        .footer-section {
+            background: #05080e;
+            border-top: 1px solid var(--border-subtle);
+            padding: 70px 0 35px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand h4 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            max-width: 480px;
+        }
+
+        .references-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gold);
+            margin-bottom: 18px;
+        }
+
+        .references-list {
+            list-style-type: decimal;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .reference-item {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .reference-item em {
+            color: #e2e8f0;
+            font-style: italic;
+        }
+
+        .footer-legal-bar {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .ai-disclaimer {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            max-width: 680px;
+            line-height: 1.45;
+        }
+
+        .copyright {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 992px) {
+            .migration-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .patterns-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 50px 0 40px;
+            }
+
+            .stats-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .section-block {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="navbar" id="top-nav">
+        <nav class="nav-inner">
+            <a href="#inicio" class="nav-logo" title="Ir al inicio">
+                <div class="uni-emblem">UNI</div>
+                <div class="nav-brand-text">
+                    <span>INTERCULTURALIDAD</span>
+                    <span class="nav-brand-sub">GRUPO 2M5-SIS-S</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                <li><a href="#memoria" class="nav-link">Memoria</a></li>
+                <li><a href="#migracion" class="nav-link">Migración</a></li>
+                <li><a href="#diversidad" class="nav-link">Diversidad</a></li>
+                <li><a href="#reflexion" class="nav-link">Reflexión</a></li>
+                <li><a href="#fuentes" class="nav-link">Fuentes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 1. ENCABEZADO / INICIO -->
+    <main>
+        <section class="hero-section" id="inicio">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge-wrap">
+                        <span class="badge">Producto Final de Examen Universitario</span>
+                        <span class="badge badge-gold">Ingeniería de Sistemas</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Proyecto de <span>Interculturalidad</span> y Reencuentros Familiares
+                    </h1>
+
+                    <div class="hero-subtitle">
+                        <span>Universidad Nacional de Ingeniería (UNI)</span>
+                        <span class="uni-tag">Grupo 2M5-SIS-S</span>
+                    </div>
+
+                    <p style="max-width: 720px; margin: 0 auto; font-size: 1.05rem;">
+                        Investigación etnográfica y genealógica aplicada a cuatro familias nicaragüenses. Un estudio
+                        sobre raíces ancestrales, dinámicas migratorias hacia Managua y el diálogo intercultural que
+                        forja nuestra identidad compartida.
+                    </p>
+
+                    <!-- 4 Integrantes en orden estricto y en mayúsculas -->
+                    <div class="integrantes-wrapper">
+                        <div class="integrantes-header">Equipo de Investigación (Integrantes)</div>
+                        <div class="integrantes-grid">
+
+                            <div class="integrante-card">
+                                <div class="integrante-order">INTEGRANTE 01</div>
+                                <div class="integrante-nombre">SALINAS LÓPEZ GEREMY DAVID</div>
+                                <div class="integrante-meta">
+                                    <span>📍 Raíz: Chinandega</span> • <span>EGO 1</span>
+                                </div>
+                            </div>
+
+                            <div class="integrante-card">
+                                <div class="integrante-order">INTEGRANTE 02</div>
+                                <div class="integrante-nombre">BORGE RODRÍGUEZ LEONEL MARTIN</div>
+                                <div class="integrante-meta">
+                                    <span>📍 Raíz: Boaco</span> • <span>EGO 2</span>
+                                </div>
+                            </div>
+
+                            <div class="integrante-card">
+                                <div class="integrante-order">INTEGRANTE 03</div>
+                                <div class="integrante-nombre">ESCOTO ESPINOZA JAZMIN ANTHONELA</div>
+                                <div class="integrante-meta">
+                                    <span>📍 Raíz: Matagalpa</span> • <span>EGO 3</span>
+                                </div>
+                            </div>
+
+                            <div class="integrante-card">
+                                <div class="integrante-order">INTEGRANTE 04</div>
+                                <div class="integrante-nombre">BARRIOS ARIAS CAMILA ALEJANDRA</div>
+                                <div class="integrante-meta">
+                                    <span>📍 Raíz: Carazo</span> • <span>EGO 4</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Métricas -->
+                    <div class="stats-strip">
+                        <div class="stat-item">
+                            <div class="stat-num">4</div>
+                            <div class="stat-label">Familias & Genogramas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">5</div>
+                            <div class="stat-label">Generaciones Estudiadas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">4</div>
+                            <div class="stat-label">Departamentos de Origen</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">1</div>
+                            <div class="stat-label">Destino Común: Managua</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SECCIÓN MEMORIA: GENOGRAMA FAMILIAR INTERACTIVO -->
+        <section class="section-block" id="memoria">
+            <div class="container">
+
+                <div class="section-header">
+                    <span class="badge">Método Genealógico de W.H.R. Rivers</span>
+                    <h2 class="section-title">Memoria: Genogramas Familiares</h2>
+                    <p class="section-desc">
+                        Reconstrucción gráfica y etnográfica de los árboles genealógicos de las cuatro familias. Haz
+                        clic en la <strong>vista previa del gráfico</strong> o en el botón del <strong>EGO
+                            (estudiante)</strong> para examinar las láminas originales y el desglose de parentesco.
+                    </p>
+                </div>
+
+                <div class="genogram-cards-grid">
+
+                    <!-- Familia 1: Salinas López -->
+                    <div class="family-card" id="card-salinas">
+                        <div class="family-card-tag">Tronco Genealógico Occidente</div>
+                        <h3 class="family-card-title">Familia Salinas López</h3>
+
+                        <!-- Vista previa del gráfico -->
+                        <div class="card-graph-preview" onclick="openEgoModal('salinas', 'graphs')"
+                            title="Clic para ver el gráfico en alta definición">
+                            <img src="img/geremy-salinas-genograma.png" alt="Genograma Geremy Salinas"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80';">
+                            <div class="card-graph-overlay">
+                                <span class="card-graph-badge">🖼️ Ver Gráfico Original</span>
+                                <span class="card-graph-count">5 Generaciones</span>
+                            </div>
+                        </div>
+
+                        <button class="ego-action-btn" onclick="openEgoModal('salinas', 'ego')"
+                            aria-label="Ver detalles de Geremy David Salinas López">
+                            <div class="ego-btn-info">
+                                <div class="ego-badge-label">
+                                    <span class="ego-pulse-dot"></span>
+                                    EGO Estudiante
+                                </div>
+                                <div class="ego-btn-name">Geremy David Salinas López</div>
+                            </div>
+                            <span class="ego-click-hint">Ver Ficha ↗</span>
+                        </button>
+
+                        <div class="parents-preview">
+                            <strong>Padres directos:</strong>
+                            <span>Harry Maycol Salinas Valle y Sonia del Socorro López Espinales</span>
+                        </div>
+                    </div>
+
+                    <!-- Familia 2: Borge Rodríguez -->
+                    <div class="family-card" id="card-borge">
+                        <div class="family-card-tag">Tronco Genealógico Centro</div>
+                        <h3 class="family-card-title">Familia Borge Rodríguez</h3>
+
+                        <!-- Vista previa del gráfico -->
+                        <div class="card-graph-preview" onclick="openEgoModal('borge', 'graphs')"
+                            title="Clic para ver los gráficos en alta definición">
+                            <img src="img/leonel-borge-materno.png" alt="Genograma Leonel Borge"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80';">
+                            <div class="card-graph-overlay">
+                                <span class="card-graph-badge">🖼️ Ver Gráficos Originales</span>
+                                <span class="card-graph-count">2 Láminas: Materno + Paterno</span>
+                            </div>
+                        </div>
+
+                        <button class="ego-action-btn" onclick="openEgoModal('borge', 'ego')"
+                            aria-label="Ver detalles de Leonel Martin Borge Rodríguez">
+                            <div class="ego-btn-info">
+                                <div class="ego-badge-label">
+                                    <span class="ego-pulse-dot"></span>
+                                    EGO Estudiante
+                                </div>
+                                <div class="ego-btn-name">Leonel Martin Borge Rodríguez</div>
+                            </div>
+                            <span class="ego-click-hint">Ver Ficha ↗</span>
+                        </button>
+
+                        <div class="parents-preview">
+                            <strong>Padres directos:</strong>
+                            <span>Leonel Miguel Borge Lanza y Maria Melania Rodriguez Lopez</span>
+                        </div>
+                    </div>
+
+                    <!-- Familia 3: Escoto Espinoza -->
+                    <div class="family-card" id="card-escoto">
+                        <div class="family-card-tag">Tronco Genealógico Norte</div>
+                        <h3 class="family-card-title">Familia Escoto Espinoza</h3>
+
+                        <!-- Vista previa del gráfico -->
+                        <div class="card-graph-preview" onclick="openEgoModal('escoto', 'graphs')"
+                            title="Clic para ver el gráfico en alta definición">
+                            <img src="img/jazmin-escoto-genograma.png" alt="Genograma Jazmin Escoto"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80';">
+                            <div class="card-graph-overlay">
+                                <span class="card-graph-badge">🖼️ Ver Gráfico Original</span>
+                                <span class="card-graph-count">Árbol Integral</span>
+                            </div>
+                        </div>
+
+                        <button class="ego-action-btn" onclick="openEgoModal('escoto', 'ego')"
+                            aria-label="Ver detalles de Jazmin Anthonela Escoto Espinoza">
+                            <div class="ego-btn-info">
+                                <div class="ego-badge-label">
+                                    <span class="ego-pulse-dot"></span>
+                                    EGO Estudiante
+                                </div>
+                                <div class="ego-btn-name">Jazmin Anthonela Escoto Espinoza</div>
+                            </div>
+                            <span class="ego-click-hint">Ver Ficha ↗</span>
+                        </button>
+
+                        <div class="parents-preview">
+                            <strong>Padres directos:</strong>
+                            <span>Joaquin Antonio Escoto Galeano y Minolva Espinoza Ruiz</span>
+                        </div>
+                    </div>
+
+                    <!-- Familia 4: Barrios Arias -->
+                    <div class="family-card" id="card-barrios">
+                        <div class="family-card-tag">Tronco Genealógico Meseta Sur</div>
+                        <h3 class="family-card-title">Familia Barrios Arias</h3>
+
+                        <!-- Vista previa del gráfico -->
+                        <div class="card-graph-preview" onclick="openEgoModal('barrios', 'graphs')"
+                            title="Clic para ver los gráficos paterno y materno en alta definición">
+                            <img src="img/camila-barrios-paterno.png" alt="Genograma Camila Barrios"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80';">
+                            <div class="card-graph-overlay">
+                                <span class="card-graph-badge">🖼️ Ver Gráficos Originales</span>
+                                <span class="card-graph-count">2 Láminas: Paterno + Materno</span>
+                            </div>
+                        </div>
+
+                        <button class="ego-action-btn" onclick="openEgoModal('barrios', 'ego')"
+                            aria-label="Ver detalles de Camila Alejandra Barrios Arias">
+                            <div class="ego-btn-info">
+                                <div class="ego-badge-label">
+                                    <span class="ego-pulse-dot"></span>
+                                    EGO Estudiante
+                                </div>
+                                <div class="ego-btn-name">Camila Alejandra Barrios Arias</div>
+                            </div>
+                            <span class="ego-click-hint">Ver Ficha ↗</span>
+                        </button>
+
+                        <div class="parents-preview">
+                            <strong>Padres directos:</strong>
+                            <span>Gilberto Danilo Barrios Andino y Martha Dinora Arias Quintanilla</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. SECCIÓN TRADICIONES Y MIGRACIÓN -->
+        <section class="section-block" id="migracion" style="background: rgba(13, 18, 28, 0.45);">
+            <div class="container">
+
+                <div class="section-header">
+                    <span class="badge badge-gold">Geografía Cultural y Movilidad Humana</span>
+                    <h2 class="section-title">Tradiciones y Rutas de Migración</h2>
+                    <p class="section-desc">
+                        Visualización interactiva de las trayectorias familiares desde diversas regiones de Nicaragua
+                        hacia <strong>Managua</strong>, punto de encuentro académico y confluencia cultural.
+                    </p>
+                </div>
+
+                <div class="migration-layout">
+
+                    <!-- Mapa SVG -->
+                    <div class="map-canvas-card">
+                        <div class="map-header">
+                            <span style="font-weight: 700; font-size: 0.95rem; color: #fff;">Mapa de Convergencia
+                                Territorial</span>
+                            <span class="badge" id="map-status-badge">Ruta activa: Todas</span>
+                        </div>
+
+                        <div class="map-container">
+                            <svg class="map-svg" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="mapBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#0f172a" />
+                                        <stop offset="100%" stop-color="#0b111e" />
+                                    </linearGradient>
+
+                                    <linearGradient id="lakeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25" />
+                                        <stop offset="100%" stop-color="#0369a1" stop-opacity="0.1" />
+                                    </linearGradient>
+
+                                    <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+
+                                <path
+                                    d="M 80,120 Q 140,50 250,70 Q 380,90 420,180 Q 450,280 380,360 Q 280,410 200,380 Q 120,350 70,260 Z"
+                                    fill="url(#mapBgGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+                                <!-- Lagos -->
+                                <ellipse cx="195" cy="225" rx="38" ry="22" fill="url(#lakeGrad)"
+                                    stroke="rgba(56, 189, 248, 0.3)" stroke-width="1" />
+                                <text x="175" y="228" font-size="8" fill="#38bdf8" opacity="0.6">Xolotlán</text>
+
+                                <ellipse cx="260" cy="305" rx="65" ry="38" fill="url(#lakeGrad)"
+                                    stroke="rgba(56, 189, 248, 0.3)" stroke-width="1" />
+                                <text x="240" y="310" font-size="9" fill="#38bdf8" opacity="0.6">Cocibolca</text>
+
+                                <!-- Rutas Animadas -->
+                                <path id="path-chinandega" class="route-path" d="M 105,170 Q 140,195 190,245"
+                                    fill="none" stroke="#38bdf8" stroke-width="3" filter="url(#glowEffect)" />
+
+                                <path id="path-boaco" class="route-path" d="M 285,210 Q 240,225 190,245" fill="none"
+                                    stroke="#f59e0b" stroke-width="3" filter="url(#glowEffect)" />
+
+                                <path id="path-matagalpa" class="route-path" d="M 225,145 Q 210,190 190,245" fill="none"
+                                    stroke="#10b981" stroke-width="3" filter="url(#glowEffect)" />
+
+                                <path id="path-carazo" class="route-path" d="M 180,295 Q 185,270 190,245" fill="none"
+                                    stroke="#ec4899" stroke-width="3" filter="url(#glowEffect)" />
+
+                                <!-- Marcadores -->
+                                <g class="city-marker" onclick="highlightRoute('chinandega')">
+                                    <circle cx="105" cy="170" r="7" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+                                    <text x="45" y="155" font-size="11" font-weight="700"
+                                        fill="#ffffff">Chinandega</text>
+                                    <text x="45" y="168" font-size="9" fill="#94a3b8">G. Salinas</text>
+                                </g>
+
+                                <g class="city-marker" onclick="highlightRoute('matagalpa')">
+                                    <circle cx="225" cy="145" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+                                    <text x="240" y="142" font-size="11" font-weight="700"
+                                        fill="#ffffff">Matagalpa</text>
+                                    <text x="240" y="155" font-size="9" fill="#94a3b8">J. Escoto</text>
+                                </g>
+
+                                <g class="city-marker" onclick="highlightRoute('boaco')">
+                                    <circle cx="285" cy="210" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="2" />
+                                    <text x="298" y="210" font-size="11" font-weight="700" fill="#ffffff">Boaco</text>
+                                    <text x="298" y="223" font-size="9" fill="#94a3b8">L. Borge</text>
+                                </g>
+
+                                <g class="city-marker" onclick="highlightRoute('carazo')">
+                                    <circle cx="180" cy="295" r="7" fill="#ec4899" stroke="#ffffff" stroke-width="2" />
+                                    <text x="120" y="305" font-size="11" font-weight="700" fill="#ffffff">Carazo</text>
+                                    <text x="120" y="318" font-size="9" fill="#94a3b8">C. Barrios</text>
+                                </g>
+
+                                <!-- Managua (Destino) -->
+                                <g class="city-marker" style="transform-origin: 190px 245px;">
+                                    <circle cx="190" cy="245" r="14" fill="rgba(14, 165, 233, 0.25)" />
+                                    <circle cx="190" cy="245" r="9" fill="#ffffff" stroke="#0ea5e9" stroke-width="3" />
+                                    <text x="175" y="272" font-size="12" font-weight="800" fill="#38bdf8"
+                                        text-anchor="middle">MANAGUA</text>
+                                    <text x="175" y="284" font-size="9" fill="#cbd5e1" text-anchor="middle">Punto de
+                                        Encuentro UNI</text>
+                                </g>
+                            </svg>
+                        </div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 10px; text-align: center;">
+                            💡 Haz clic en cualquier departamento o tarjeta lateral para enfocar la ruta migratoria.
+                        </div>
+                    </div>
+
+                    <!-- Rutas -->
+                    <div class="migration-routes-list">
+
+                        <div class="route-card active" id="card-route-chinandega"
+                            onclick="highlightRoute('chinandega')">
+                            <div class="route-card-top">
+                                <span class="route-student">Geremy Salinas</span>
+                                <span class="route-badge">Ruta Occidente</span>
+                            </div>
+                            <div class="route-path-info">
+                                <span>Chinandega</span>
+                                <span class="route-arrow">➔</span>
+                                <span class="route-destination">Managua</span>
+                            </div>
+                            <p class="route-cultural-detail">
+                                Migración desde las cálidas llanuras del Pacífico occidental. Tradición marcada por la
+                                devoción a la Virgen de El Viejo (cuna de la Purísima) y una fuerte identidad
+                                agroindustrial y portuaria.
+                            </p>
+                        </div>
+
+                        <div class="route-card" id="card-route-boaco" onclick="highlightRoute('boaco')">
+                            <div class="route-card-top">
+                                <span class="route-student">Leonel Borge</span>
+                                <span class="route-badge"
+                                    style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Ruta Central</span>
+                            </div>
+                            <div class="route-path-info">
+                                <span>Boaco</span>
+                                <span class="route-arrow">➔</span>
+                                <span class="route-destination">Managua</span>
+                            </div>
+                            <p class="route-cultural-detail">
+                                Migración desde "La Ciudad de Dos Pisos". Patrimonio enraizado en la cultura ganadera,
+                                bailes de moros y cristianos de Santiago Apóstol, y reconocidas tradiciones lácteas y
+                                culinarias de la zona central.
+                            </p>
+                        </div>
+
+                        <div class="route-card" id="card-route-matagalpa" onclick="highlightRoute('matagalpa')">
+                            <div class="route-card-top">
+                                <span class="route-student">Jazmin Escoto</span>
+                                <span class="route-badge"
+                                    style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Ruta Norte</span>
+                            </div>
+                            <div class="route-path-info">
+                                <span>Matagalpa</span>
+                                <span class="route-arrow">➔</span>
+                                <span class="route-destination">Managua</span>
+                            </div>
+                            <p class="route-cultural-detail">
+                                Migración desde "La Perla del Septentrión". Cultura montañosa cafetalera, rica en polkas
+                                y mazurcas campesinas, gastronomía derivada del maíz fresco y fuerte sentido de
+                                comunidad norteña.
+                            </p>
+                        </div>
+
+                        <div class="route-card" id="card-route-carazo" onclick="highlightRoute('carazo')">
+                            <div class="route-card-top">
+                                <span class="route-student">Camila Barrios</span>
+                                <span class="route-badge"
+                                    style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">Ruta Meseta</span>
+                            </div>
+                            <div class="route-path-info">
+                                <span>Carazo</span>
+                                <span class="route-arrow">➔</span>
+                                <span class="route-destination">Managua</span>
+                            </div>
+                            <p class="route-cultural-detail">
+                                Migración desde la Meseta de los Pueblos. Cuna del teatro callejero El Güegüense
+                                (Patrimonio de la Humanidad), tradiciones de San Sebastián, y gastronomía ancestral de
+                                picadillo y chicha de jengibre.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. SECCIÓN DIVERSIDAD: PATRONES CUANTIFICADOS -->
+        <section class="section-block" id="diversidad">
+            <div class="container">
+
+                <div class="section-header">
+                    <span class="badge">Etnografía Cuantitativa y Comparada</span>
+                    <h2 class="section-title">Diversidad: Análisis de Patrones</h2>
+                    <p class="section-desc">
+                        Contraste analítico entre las prácticas culturales compartidas que forjan cohesión nacional y
+                        las divergencias regionales que demuestran el pluriculturalismo nicaragüense.
+                    </p>
+                </div>
+
+                <div class="patterns-container">
+
+                    <!-- Patrones Comunes (3) -->
+                    <div class="pattern-column">
+                        <div class="pattern-col-header">
+                            <div class="pattern-col-icon common">✓</div>
+                            <div>
+                                <h3 class="pattern-col-title">Patrones Comunes</h3>
+                                <div class="pattern-col-subtitle">3 Tradiciones Compartidas por las 4 Familias (100%)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pattern-items-list">
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Celebración de La Purísima en Diciembre</span>
+                                    <span class="pattern-item-num">1</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    Todas las familias celebran de manera activa la tradicional fiesta mariana de la
+                                    Purísima Concepción de María en diciembre. Un fenómeno sincrético que congrega
+                                    cantos, altares artesanales y la distribución comunitaria de "la gorra" o brindis.
+                                </p>
+                            </div>
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Gallina Rellena para la Cena del 24 de
+                                        Diciembre</span>
+                                    <span class="pattern-item-num">2</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    Todas las familias preparan de manera unánime el tradicional platillo de gallina
+                                    rellena para la cena navideña del 24 de diciembre. Este banquete gastronómico
+                                    representa el legado colonial adaptado con ingredientes autóctonos en la mesa
+                                    familiar.
+                                </p>
+                            </div>
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Festejo de Año Nuevo el 31 de Diciembre</span>
+                                    <span class="pattern-item-num">3</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    Todas las familias festejan juntas el reencuentro y la despedida del año el 31 de
+                                    diciembre. Es un ritual colectivo de renovación, estrechamiento de lazos familiares
+                                    intergeneracionales y esperanza para el porvenir.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Patrones Diferentes (3) -->
+                    <div class="pattern-column">
+                        <div class="pattern-col-header">
+                            <div class="pattern-col-icon different">≠</div>
+                            <div>
+                                <h3 class="pattern-col-title">Patrones Diferentes</h3>
+                                <div class="pattern-col-subtitle">3 Divergencias Regionales y Socioculturales</div>
+                            </div>
+                        </div>
+
+                        <div class="pattern-items-list">
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Orígenes Geográficos Distintos</span>
+                                    <span class="pattern-item-num">1</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    Las cuatro familias provienen de cuatro departamentos con geografías, climas y
+                                    economías profundamente diferenciadas: <strong>Chinandega</strong> (Pacífico cálido
+                                    y costero), <strong>Boaco</strong> (Centro ganadero y serrano),
+                                    <strong>Matagalpa</strong> (Norte montañoso y cafetalero) y <strong>Carazo</strong>
+                                    (Meseta fresca y folclórica).
+                                </p>
+                            </div>
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Creencias Religiosas Diversas</span>
+                                    <span class="pattern-item-num">2</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    Existe diversidad en el ejercicio espiritual: <strong>3 familias profesan la fe
+                                        católica</strong> y <strong>1 familia profesa la fe cristiana
+                                        evangélica</strong>. Esto evidencia la pluralidad de cultos coexistentes en el
+                                    contexto social actual de Nicaragua.
+                                </p>
+                            </div>
+
+                            <div class="pattern-card-item">
+                                <div class="pattern-item-header">
+                                    <span class="pattern-item-title">Conexiones Genealógicas Específicas</span>
+                                    <span class="pattern-item-num">3</span>
+                                </div>
+                                <p class="pattern-item-desc">
+                                    En el estudio de linajes, un integrante comparte el apellido <strong>Escoto</strong>
+                                    con uno y <strong>López</strong> con otro, mientras el resto no comparte vínculos
+                                    nominales directos.
+                                </p>
+                                <div class="genealogy-highlight-tag">
+                                    🔍 <em>Hallazgo genealógico:</em> Leonel Borge posee en su línea materna a bisabuela
+                                    María Ercilia Escoto Ramos (conexión con Jazmin Escoto) y a su abuela Petrona del
+                                    Socorro López Orozco (conexión nominal con Geremy Salinas López).
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. SECCIÓN REFLEXIÓN INTERCULTURAL -->
+        <section class="section-block" id="reflexion" style="background: rgba(13, 18, 28, 0.45);">
+            <div class="container">
+
+                <div class="section-header">
+                    <span class="badge badge-gold">Síntesis Analítica Universitaria</span>
+                    <h2 class="section-title">Reflexión Intercultural</h2>
+                    <p class="section-desc">
+                        Evaluación conceptual sobre la cohesión, la pluriculturalidad y los aprendizajes derivados del
+                        estudio etnográfico de nuestras familias.
+                    </p>
+                </div>
+
+                <div class="reflection-grid">
+
+                    <div class="reflection-card">
+                        <div class="reflection-num">Pregunta 01 • Análisis Cultural</div>
+                        <h3 class="reflection-question">
+                            ¿Qué revelan los patrones comunes sobre la diversidad cultural nicaragüense?
+                        </h3>
+                        <p class="reflection-answer">
+                            Los patrones comunes evidencian que la diversidad cultural en Nicaragua no fragmenta a la
+                            sociedad, sino que se articula alrededor de un núcleo de sincretismo festivo y gastronómico
+                            compartido. La universalidad de La Purísima, la preparación unánime de la gallina rellena
+                            navideña y el ritual de fin de año demuestran que, más allá de los dialectos locales,
+                            altitudes o microclimas, las familias han heredado un calendario festivo que actúa como
+                            puente de cohesión y fraternidad colectiva.
+                        </p>
+                    </div>
+
+                    <div class="reflection-card">
+                        <div class="reflection-num">Pregunta 02 • Pluriculturalidad</div>
+                        <h3 class="reflection-question">
+                            ¿Qué diferencias demuestran que Nicaragua es un país pluricultural?
+                        </h3>
+                        <p class="reflection-answer">
+                            Las marcadas diferencias territoriales y espirituales comprueban que Nicaragua es un mosaico
+                            pluricultural. La coexistencia de 3 familias católicas y 1 familia cristiana refleja la
+                            evolución y diversificación de las cosmovisiones religiosas. Asimismo, provenir de cuatro
+                            polos geográficos distintos —las llanuras de Chinandega, las serranías de Boaco, los bosques
+                            de café de Matagalpa y la meseta cultural de Carazo— aporta vocablos, expresiones
+                            vernáculas, formas de trabajo y perspectivas de vida únicas que enriquecen el tejido
+                            nacional.
+                        </p>
+                    </div>
+
+                    <!-- Respuesta literal 3 -->
+                    <div class="reflection-card featured">
+                        <div class="reflection-num" style="color: #fbbf24;">Pregunta 03 • Experiencia Familiar</div>
+                        <h3 class="reflection-question">
+                            ¿Cómo se refleja la interculturalidad en la historia de sus propias familias?
+                        </h3>
+                        <div class="reflection-answer literal-quote">
+                            "La vivimos a través del respeto y la unión de nuestras diferentes raíces regionales
+                            (Managua, Boaco, Matagalpa y Chinandega), compartiendo tradiciones culinarias y religiosas
+                            únicas, pero manteniendo un punto de encuentro en nuestras celebraciones de fin de año"
+                        </div>
+                    </div>
+
+                    <!-- Respuesta literal 4 -->
+                    <div class="reflection-card featured">
+                        <div class="reflection-num" style="color: #fbbf24;">Pregunta 04 • Aprendizaje Colectivo</div>
+                        <h3 class="reflection-question">
+                            ¿Qué aprendieron sobre sus compañeros a través de esta actividad?
+                        </h3>
+                        <div class="reflection-answer literal-quote">
+                            "Aprendimos que la identidad no es aislada; descubrimos que, a pesar de venir de entornos
+                            geográficos distintos, estamos profundamente conectados por la historia, la cultura y hasta
+                            por conexiones genealógicas específicas"
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. PIE DE PÁGINA (FUENTES, CRÉDITOS Y AVISO LEGAL) -->
+    <footer class="footer-section" id="fuentes">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                        <div class="uni-emblem" style="width: 32px; height: 32px; font-size: 0.75rem;">UNI</div>
+                        <h4 style="margin: 0;">Universidad Nacional de Ingeniería</h4>
+                    </div>
+                    <p>
+                        Facultad de Electrotecnia y Computación • Carrera de Ingeniería de Sistemas.<br>
+                        Curso de Interculturalidad • Grupo 2M5-SIS-S.<br>
+                        Producto Final de Investigación Genealógica y Etnográfica.
+                    </p>
+                </div>
+
+                <div class="footer-references">
+                    <div class="references-title">Referencias Bibliográficas</div>
+                    <ol class="references-list">
+                        <li class="reference-item">
+                            Rivers, W. H. R. (1910). <em>The Genealogical Method of Anthropological Inquiry</em>. The
+                            Sociological Review, 3(1), 1–12.
+                        </li>
+                        <li class="reference-item">
+                            Murdock, G. P. (1949). <em>Social Structure</em>. Macmillan.
+                        </li>
+                        <li class="reference-item">
+                            Vasco Uribe, L. G. (2002). <em>Entre selva y montaña: técnicas de investigación
+                                etnográfica</em>. Instituto Colombiano de Antropología e Historia (ICANH).
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="footer-legal-bar">
+                <div class="ai-disclaimer">
+                    <strong>Aviso institucional:</strong> Nota: Se utilizó inteligencia artificial para la generación de
+                    la estructura interactiva y el diseño del código de esta página web, cumpliendo con los parámetros
+                    de la guía del producto final.
+                </div>
+                <div class="copyright">
+                    © Proyecto de Interculturalidad UNI • Grupo 2M5-SIS-S
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MODAL INTERACTIVO DE GENOGRAMA (EGO, CAPTURAS Y ASCENDENCIA) -->
+    <div class="modal-backdrop" id="egoModal" onclick="handleBackdropClick(event)">
+        <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modalEgoName">
+
+            <div class="modal-header">
+                <div>
+                    <span class="badge badge-gold" id="modalFamilyTag">Familia</span>
+                    <h3 id="modalFamilyTitle" style="font-size: 1.35rem; margin-top: 6px;">Ficha Genealógica y Gráficos
+                    </h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeEgoModal()"
+                    aria-label="Cerrar ventana emergente">✕</button>
+            </div>
+
+            <div class="modal-body" id="modalContent"></div>
+
+        </div>
+    </div>
+
+    <!-- LIGHTBOX / VISOR EN PANTALLA COMPLETA PARA GRÁFICOS -->
+    <div class="lightbox-backdrop" id="imageLightbox" onclick="handleLightboxBackdrop(event)">
+        <div class="lightbox-toolbar">
+            <span class="lightbox-title" id="lightboxTitle">Gráfico Original</span>
+            <button class="lightbox-btn" onclick="zoomImage(-0.25)" title="Reducir">🔍 -</button>
+            <button class="lightbox-btn" onclick="zoomImage(0.25)" title="Aumentar">🔍 +</button>
+            <button class="lightbox-btn" onclick="resetZoom()" title="Restablecer tamaño">1:1</button>
+            <button class="lightbox-btn" onclick="closeLightbox()" title="Cerrar visor">✕ Cerrar</button>
+        </div>
+        <div class="lightbox-img-wrapper" id="lightboxWrapper">
+            <img src="" id="lightboxImg" alt="Gráfico ampliado">
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT AUTOCONTENIDO -->
+    <script>
+        /* ==========================================================================
+           BASE DE DATOS COMPLETA DE LOS GENOGRAMAS (INTEGRANDO AMBOS LADOS Y FOTOS)
+           ========================================================================== */
+        const genealogicalDatabase = {
+            salinas: {
+                family: "Familia Salinas López",
+                region: "Chinandega (Occidente)",
+                tag: "Tronco Genealógico de Chinandega",
+                ego: "Geremy David Salinas López",
+                parents: {
+                    father: "Harry Maycol Salinas Valle",
+                    mother: "Sonia del Socorro López Espinales"
+                },
+                images: [
+                    {
+                        title: "Genograma Familiar — 5 Generaciones (Completo)",
+                        src: "img/geremy-salinas-genograma.png",
+                        desc: "Método genealógico de W.H.R. Rivers · EGO: Geremy David Salinas López. Comprende desde tatarabuelos (G1) hasta la generación de EGO y hermanos (G5)."
+                    }
+                ],
+                generations: [
+                    {
+                        tier: "G1 · Tatarabuelos (†)",
+                        nodes: [
+                            { name: "Tranquilino Alemán †", gender: "m" },
+                            { name: "Mercedes E. Salinas †", gender: "f" },
+                            { name: "Víctor Madrigal †", gender: "m" },
+                            { name: "Mercedes Ortega Urbina †", gender: "f" },
+                            { name: "Francisco Valle †", gender: "m" },
+                            { name: "Juana Valle †", gender: "f" },
+                            { name: "Víctor M. Cajina †", gender: "m" },
+                            { name: "Dina I. Zeledón Divina †", gender: "f" },
+                            { name: "Miguel Sáenz † (España)", gender: "m" },
+                            { name: "Celina Espinales † (Chinandega)", gender: "f" },
+                            { name: "Pedro Romero † (Honduras)", gender: "m" },
+                            { name: "María Martínez † (Chinandega)", gender: "f" },
+                            { name: "Gregorio López † (Honduras)", gender: "m" },
+                            { name: "Fernanda Munguía † (Chinandega)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G2 · Bisabuelos (†)",
+                        nodes: [
+                            { name: "Julio Emilio Salinas Alemán †", gender: "m" },
+                            { name: "Martha Ortega Urbina †", gender: "f" },
+                            { name: "Alberto Facundo Valle †", gender: "m" },
+                            { name: "Zulema Cajina Zeledón †", gender: "f" },
+                            { name: "Aníbal Espinales Sáenz † (Revolucionario)", gender: "m" },
+                            { name: "María E. Martínez Romero † (Ama de casa)", gender: "f" },
+                            { name: "Ernesto López Munguía †", gender: "m" },
+                            { name: "María Braulia Meza Alvarado †", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G3 · Abuelos Paternos y Maternos",
+                        nodes: [
+                            { name: "Edgar Antonio Salinas Ortega (vivo)", gender: "m" },
+                            { name: "Marianela Valle Cajina (viva)", gender: "f" },
+                            { name: "Miguel Ángel López Meza (vivo - Admin empresas)", gender: "m" },
+                            { name: "Sonia de Jesús Espinales Martínez (viva - El Viejo)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G4 · Padres Directos",
+                        nodes: [
+                            { name: "Harry Maycol Salinas Valle (Padre de EGO)", gender: "m" },
+                            { name: "Sonia del Socorro López Espinales (Madre de EGO)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G5 · EGO y Hermanos",
+                        nodes: [
+                            { name: "Geremy David Salinas López (EGO)", gender: "m", isEgo: true },
+                            { name: "Sonia Michelle Salinas López (Hermana bilateral)", gender: "f" },
+                            { name: "Harry Salinas Monge (Hermano mayor paterno)", gender: "m" },
+                            { name: "Michael Antwoen Salinas Monge (Hermano paterno)", gender: "m" },
+                            { name: "Marcela Monserrat Salinas Morales (Hermana paterna)", gender: "f" },
+                            { name: "Camilo Yahir Salinas Hernández (Hermano paterno)", gender: "m" }
+                        ]
+                    }
+                ]
+            },
+
+            borge: {
+                family: "Familia Borge Rodríguez",
+                region: "Boaco (Zona Central)",
+                tag: "Tronco Genealógico de Boaco",
+                ego: "Leonel Martin Borge Rodríguez",
+                parents: {
+                    father: "Leonel Miguel Borge Lanza",
+                    mother: "Maria Melania Rodriguez Lopez"
+                },
+                images: [
+                    {
+                        title: "Genograma Materno (Linaje Rodríguez López y Escoto)",
+                        src: "img/leonel-borge-materno.png",
+                        desc: "Árbol materno con antepasados Rodríguez Cano, Pérez García, Escoto Ramos y López Orozco hacia Maria Melania Rodriguez Lopez y EGO."
+                    },
+                    {
+                        title: "Genograma Paterno (Linaje Borge Lanza y Amador)",
+                        src: "img/leonel-borge-paterno.png",
+                        desc: "Árbol paterno con líneas Lanza Valle, Paz Sequeira, Amador Rodríguez y Borge Fargas hasta Leonel Miguel Borge Lanza y EGO."
+                    }
+                ],
+                generations: [
+                    {
+                        tier: "G1 / G2 · Bisabuelos y Antepasados (Lado Paterno y Materno)",
+                        nodes: [
+                            { name: "Benedito Paz Sequeira †", gender: "m" },
+                            { name: "Felipa Lanza Valle †", gender: "f" },
+                            { name: "Leonardo Borge Amador †", gender: "m" },
+                            { name: "Atanacia Amador Rodríguez †", gender: "f" },
+                            { name: "María Ercilia Escoto Ramos †", gender: "f" },
+                            { name: "Blass Rodríguez †", gender: "m" },
+                            { name: "José Laureano Rodríguez Cano †", gender: "m" },
+                            { name: "María Eulalia Pérez García †", gender: "f" },
+                            { name: "Ezequiel López †", gender: "m" },
+                            { name: "Julia Orozco †", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G3 · Abuelos Paternos y Maternos",
+                        nodes: [
+                            { name: "Benita Lanza Paz", gender: "f" },
+                            { name: "Leonardo Borge Amador †", gender: "m" },
+                            { name: "Martin Rodríguez Escoto", gender: "m" },
+                            { name: "Petrona del Socorro López Orozco †", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G4 · Padres Directos y Tíos",
+                        nodes: [
+                            { name: "Leonel Miguel Borge Lanza (Padre de EGO)", gender: "m" },
+                            { name: "Maria Melania Rodriguez Lopez (Madre de EGO)", gender: "f" },
+                            { name: "Erodes Borge Lanza (Tío)", gender: "m" },
+                            { name: "Rosario Borge Lanza (Tía)", gender: "f" },
+                            { name: "Miguez Rodríguez López (Tío)", gender: "m" },
+                            { name: "Dulce María Rodríguez López (Tía)", gender: "f" },
+                            { name: "María Audelia Rodríguez López (Tía)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G5 · EGO",
+                        nodes: [
+                            { name: "Leonel Martin Borge Rodríguez (EGO)", gender: "m", isEgo: true }
+                        ]
+                    }
+                ]
+            },
+
+            escoto: {
+                family: "Familia Escoto Espinoza",
+                region: "Matagalpa (Norte Cafetalero)",
+                tag: "Tronco Genealógico de Matagalpa",
+                ego: "Jazmin Anthonela Escoto Espinoza",
+                parents: {
+                    father: "Joaquin Antonio Escoto Galeano",
+                    mother: "Minolva Espinoza Ruiz"
+                },
+                images: [
+                    {
+                        title: "Genograma Familiar Completo (Lado Escoto y Espinoza)",
+                        src: "img/jazmin-escoto-genograma.png",
+                        desc: "Representación integral de las ramas Escoto Galeano y Ruiz Martínez / Espinoza Ruiz hasta Jazmin Anthonela Escoto Espinoza."
+                    }
+                ],
+                generations: [
+                    {
+                        tier: "G1 / G2 · Bisabuelos y Antepasados",
+                        nodes: [
+                            { name: "Sr. Martínez †", gender: "m" },
+                            { name: "Liboria García †", gender: "f" },
+                            { name: "Sr. Escoto †", gender: "m" },
+                            { name: "Lila Galeano", gender: "f" },
+                            { name: "Julián Ruiz †", gender: "m" },
+                            { name: "Prudencia Martínez García", gender: "f" },
+                            { name: "Luis Espinoza †", gender: "m" },
+                            { name: "Cesaria Ruiz †", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G3 · Abuelos y Colaterales",
+                        nodes: [
+                            { name: "Norman Escoto Galeano", gender: "m" },
+                            { name: "Maricrus Escoto Galeano", gender: "f" },
+                            { name: "Norlin Escoto Galeano", gender: "m" },
+                            { name: "Santiago Espinoza", gender: "m" },
+                            { name: "Claudio Espinoza", gender: "m" },
+                            { name: "Pedro Ruiz Martínez", gender: "m" },
+                            { name: "Guillermo Ruiz Martínez", gender: "m" },
+                            { name: "Petronila Ruiz Martínez", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G4 · Padres Directos",
+                        nodes: [
+                            { name: "Joaquin Antonio Escoto Galeano (Padre de EGO)", gender: "m" },
+                            { name: "Minolva Espinoza Ruiz (Madre de EGO)", gender: "f" },
+                            { name: "Nancy Espinoza Ruiz (Tía)", gender: "f" },
+                            { name: "Betty Mercedes Espinoza Ruiz (Tía)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G5 · EGO, Hermanos y Primos",
+                        nodes: [
+                            { name: "Jazmin Anthonela Escoto Espinoza (EGO)", gender: "f", isEgo: true },
+                            { name: "Joaquin Orlando Escoto Espinoza (Hermano)", gender: "m" },
+                            { name: "Sherly Suyen Escoto Espinoza (Hermana)", gender: "f" },
+                            { name: "Isabella Sophia Vallesteros (Prima)", gender: "f" },
+                            { name: "Miguel Ángel Vallesteros (Primo)", gender: "m" }
+                        ]
+                    }
+                ]
+            },
+
+            barrios: {
+                family: "Familia Barrios Arias",
+                region: "Carazo (Meseta de los Pueblos)",
+                tag: "Tronco Genealógico de Carazo",
+                ego: "Camila Alejandra Barrios Arias",
+                parents: {
+                    father: "Gilberto Danilo Barrios Andino",
+                    mother: "Martha Dinora Arias Quintanilla"
+                },
+                images: [
+                    {
+                        title: "Genograma Lado Paterno (Linaje Barrios Andino)",
+                        src: "img/camila-barrios-paterno.png",
+                        desc: "Árbol paterno con Margarita Barrios, Demetrio Andino, Gilberto Danilo Barrios Andino (†), tías Ligia y Lesbia (†), hermanas Adriana y Cynthia, y EGO."
+                    },
+                    {
+                        title: "Genograma Lado Materno (Linaje Arias Quintanilla y Díaz)",
+                        src: "img/camila-barrios-materno.png",
+                        desc: "Árbol materno con generaciones Díaz, Bermúdez, Quintanilla y Mojica hasta Martha Dinora Arias Quintanilla y EGO."
+                    }
+                ],
+                generations: [
+                    {
+                        tier: "G1 / G2 · Bisabuelos y Antepasados (Ambos Linajes)",
+                        nodes: [
+                            { name: "Margarita Barrios (Bisabuela Paterna)", gender: "f" },
+                            { name: "Eleodoro Bermúdez † (Tatarabuelo Materno)", gender: "m" },
+                            { name: "Nicolasa Díaz † (Tatarabuela Materna)", gender: "f" },
+                            { name: "Gerónimo Mojica † (Tatarabuelo Materno)", gender: "m" },
+                            { name: "María Quintanilla † (Tatarabuela Materna)", gender: "f" },
+                            { name: "Armando Quintanilla † (Bisabuelo Materno)", gender: "m" },
+                            { name: "Francisca Díaz (Bisabuela Materna)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G3 · Abuelos Paternos y Maternos",
+                        nodes: [
+                            { name: "Demetrio Andino (Abuelo Paterno - Div.)", gender: "m" },
+                            { name: "...... Barrios (Abuela Paterna)", gender: "f" },
+                            { name: "Egna Jose Arias † (Abuelo Materno)", gender: "m" },
+                            { name: "Edaminta Quintanilla (Abuela Materna)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G4 · Padres Directos y Tíos (Paternos y Maternos)",
+                        nodes: [
+                            { name: "Gilberto Danilo Barrios Andino † (Padre de EGO)", gender: "m" },
+                            { name: "Martha Dinora Arias Quintanilla (Madre de EGO)", gender: "f" },
+                            { name: "Ligia Barrios (Tía Paterna)", gender: "f" },
+                            { name: "Lesbia Barrios † (Tía Paterna)", gender: "f" },
+                            { name: "Uriel Martín Arias Quintanilla † (Tío Materno)", gender: "m" },
+                            { name: "Egna Jose Arias Quintanilla † (Tío Materno)", gender: "m" },
+                            { name: "Marcia Anabellys Arias Quintanilla (Tía Materna)", gender: "f" }
+                        ]
+                    },
+                    {
+                        tier: "G5 · EGO, Hermanas y Familiares",
+                        nodes: [
+                            { name: "Camila Alejandra Barrios Arias (EGO)", gender: "f", isEgo: true },
+                            { name: "Adriana Barrios (Hermana Paterna)", gender: "f" },
+                            { name: "Cynthia Barrios (Hermana Paterna)", gender: "f" },
+                            { name: "Edgar Alejandro Gutiérrez Arias (Primo Materno)", gender: "m" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        /* Variables de control del visor */
+        let currentFamilyKey = 'salinas';
+        let currentImageIndex = 0;
+        let currentZoom = 1;
+
+        /* ==========================================================================
+           GESTIÓN DEL MODAL INTERACTIVO
+           ========================================================================== */
+        function openEgoModal(familyKey, defaultTab = 'graphs') {
+            currentFamilyKey = familyKey;
+            currentImageIndex = 0;
+            const data = genealogicalDatabase[familyKey];
+            if (!data) return;
+
+            document.getElementById('modalFamilyTag').textContent = data.tag;
+            document.getElementById('modalFamilyTitle').textContent = data.family;
+
+            // Estructura de pestañas
+            let html = `
+        <div class="modal-tabs">
+          <button class="modal-tab-btn ${defaultTab === 'graphs' ? 'active' : ''}" id="tab-btn-graphs" onclick="switchModalTab('graphs')">
+            🖼️ Diagramas y Capturas (${data.images.length})
+          </button>
+          <button class="modal-tab-btn ${defaultTab === 'ego' ? 'active' : ''}" id="tab-btn-ego" onclick="switchModalTab('ego')">
+            🧬 Árbol Analítico y Nodos
+          </button>
+        </div>
+
+        <!-- PESTAÑA 1: VISOR DE CAPTURAS -->
+        <div class="tab-pane ${defaultTab === 'graphs' ? 'active' : ''}" id="pane-graphs">
+          <div class="graph-viewer-container">
+      `;
+
+            // Si tiene múltiples láminas (Camila o Leonel)
+            if (data.images.length > 1) {
+                html += `<div class="graph-selector-bar">`;
+                data.images.forEach((img, idx) => {
+                    html += `
+            <button class="graph-selector-btn ${idx === 0 ? 'active' : ''}" id="graph-select-${idx}" onclick="selectModalGraph(${idx})">
+              ${img.title.split('(')[0]}
+            </button>
+          `;
+                });
+                html += `</div>`;
+            }
+
+            const firstImg = data.images[0];
+            html += `
+            <div class="graph-img-frame" onclick="openLightbox('${firstImg.src}', '${firstImg.title}')" title="Clic para ver en pantalla completa">
+              <img id="modalGraphImg" src="${firstImg.src}" alt="${firstImg.title}">
+            </div>
+
+            <div class="graph-caption-bar">
+              <div style="text-align: left;">
+                <strong id="modalGraphTitle" style="color: #fff; display: block; font-size: 0.95rem;">${firstImg.title}</strong>
+                <span id="modalGraphDesc" style="color: var(--text-muted);">${firstImg.desc}</span>
+              </div>
+              <button class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openCurrentInLightbox()">
+                🔍 Pantalla Completa
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PESTAÑA 2: EGO Y NODOS ANALÍTICOS -->
+        <div class="tab-pane ${defaultTab === 'ego' ? 'active' : ''}" id="pane-ego">
+          <div class="ego-spotlight-box">
+            <div class="ego-spotlight-title">⭐ Sujeto de Referencia (EGO del Estudiante)</div>
+            <div class="ego-spotlight-name" id="modalEgoName">${data.ego}</div>
+            <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px;">
+              📍 Región Ancestral: <strong>${data.region}</strong> • Rama Universitaria UNI 2M5-SIS-S
+            </div>
+
+            <div class="parents-highlight-grid">
+              <div class="parent-card">
+                <div class="parent-relation">Padre Directo</div>
+                <div class="parent-name">👨 ${data.parents.father}</div>
+              </div>
+              <div class="parent-card">
+                <div class="parent-relation">Madre Directa</div>
+                <div class="parent-name">👩 ${data.parents.mother}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="genealogy-tree-visual">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+              <span style="font-weight: 700; font-size: 0.95rem; color: #fff;">Estructura por Generaciones (W.H.R. Rivers)</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">▲ Masculino · ● Femenino</span>
+            </div>
+      `;
+
+            data.generations.forEach(gen => {
+                html += `
+          <div class="tree-tier">
+            <div class="tier-header">${gen.tier}</div>
+            <div class="tier-nodes">
+        `;
+
+                gen.nodes.forEach(node => {
+                    const symbolClass = node.gender === 'm' ? 'symbol-triangle' : 'symbol-circle';
+                    const egoClass = node.isEgo ? 'gen-node ego-node' : 'gen-node';
+                    html += `
+            <div class="${egoClass}">
+              <span class="${symbolClass}"></span>
+              <span>${node.name}</span>
+            </div>
+          `;
+                });
+
+                html += `
+            </div>
+          </div>
+        `;
+            });
+
+            html += `
+          </div>
+        </div>
+
+        <div style="margin-top: 22px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.75rem; color: var(--text-dim);">Examen de Interculturalidad · UNI Grupo 2M5-SIS-S</span>
+          <button class="btn btn-outline" onclick="closeEgoModal()" style="font-size: 0.85rem; padding: 8px 18px;">Cerrar Ficha</button>
+        </div>
+      `;
+
+            document.getElementById('modalContent').innerHTML = html;
+
+            const modal = document.getElementById('egoModal');
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function switchModalTab(tabKey) {
+            document.querySelectorAll('.modal-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+            const activeBtn = document.getElementById(`tab-btn-${tabKey}`);
+            const activePane = document.getElementById(`pane-${tabKey}`);
+            if (activeBtn) activeBtn.classList.add('active');
+            if (activePane) activePane.classList.add('active');
+        }
+
+        function selectModalGraph(index) {
+            currentImageIndex = index;
+            const data = genealogicalDatabase[currentFamilyKey];
+            if (!data || !data.images[index]) return;
+
+            const imgData = data.images[index];
+            const imgElem = document.getElementById('modalGraphImg');
+            const titleElem = document.getElementById('modalGraphTitle');
+            const descElem = document.getElementById('modalGraphDesc');
+
+            if (imgElem) imgElem.src = imgData.src;
+            if (titleElem) titleElem.textContent = imgData.title;
+            if (descElem) descElem.textContent = imgData.desc;
+
+            document.querySelectorAll('.graph-selector-btn').forEach((btn, idx) => {
+                if (idx === index) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
+
+        function openCurrentInLightbox() {
+            const data = genealogicalDatabase[currentFamilyKey];
+            if (!data) return;
+            const imgData = data.images[currentImageIndex] || data.images[0];
+            openLightbox(imgData.src, `${data.family} — ${imgData.title}`);
+        }
+
+        function closeEgoModal() {
+            const modal = document.getElementById('egoModal');
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleBackdropClick(event) {
+            if (event.target.id === 'egoModal') {
+                closeEgoModal();
+            }
+        }
+
+        /* ==========================================================================
+           GESTIÓN DEL LIGHTBOX / PANTALLA COMPLETA
+           ========================================================================== */
+        function openLightbox(src, title) {
+            const lightbox = document.getElementById('imageLightbox');
+            const img = document.getElementById('lightboxImg');
+            const titleElem = document.getElementById('lightboxTitle');
+
+            img.src = src;
+            titleElem.textContent = title;
+            currentZoom = 1;
+            img.style.transform = `scale(${currentZoom})`;
+
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            lightbox.classList.remove('open');
+            if (!document.getElementById('egoModal').classList.contains('open')) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function handleLightboxBackdrop(event) {
+            if (event.target.id === 'imageLightbox' || event.target.id === 'lightboxWrapper') {
+                closeLightbox();
+            }
+        }
+
+        function zoomImage(delta) {
+            currentZoom = Math.max(0.5, Math.min(3.5, currentZoom + delta));
+            document.getElementById('lightboxImg').style.transform = `scale(${currentZoom})`;
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            document.getElementById('lightboxImg').style.transform = `scale(1)`;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (document.getElementById('imageLightbox').classList.contains('open')) {
+                    closeLightbox();
+                } else if (document.getElementById('egoModal').classList.contains('open')) {
+                    closeEgoModal();
+                }
+            }
+        });
+
+        /* ==========================================================================
+           INTERACCIÓN CON EL MAPA Y RUTAS MIGRATORIAS
+           ========================================================================== */
+        function highlightRoute(regionKey) {
+            const routeCards = document.querySelectorAll('.route-card');
+            routeCards.forEach(c => c.classList.remove('active'));
+
+            const targetCard = document.getElementById(`card-route-${regionKey}`);
+            if (targetCard) targetCard.classList.add('active');
+
+            const badge = document.getElementById('map-status-badge');
+            const paths = {
+                chinandega: document.getElementById('path-chinandega'),
+                boaco: document.getElementById('path-boaco'),
+                matagalpa: document.getElementById('path-matagalpa'),
+                carazo: document.getElementById('path-carazo')
+            };
+
+            Object.keys(paths).forEach(k => {
+                if (paths[k]) {
+                    paths[k].setAttribute('stroke-width', '2');
+                    paths[k].style.opacity = '0.25';
+                }
+            });
+
+            if (paths[regionKey]) {
+                paths[regionKey].setAttribute('stroke-width', '5');
+                paths[regionKey].style.opacity = '1';
+                badge.textContent = `Enfocando: ${regionKey.charAt(0).toUpperCase() + regionKey.slice(1)} ➔ Managua`;
+            }
+        }
+
+        /* Scroll spy para barra de navegación */
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id], header[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
